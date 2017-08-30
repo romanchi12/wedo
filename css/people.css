@@ -1,0 +1,28 @@
+#wrap-search{
+	position: absolute;
+
+}
+#search-field{
+	width: 100%;
+	outline-color: #16568f;
+	height: 36px;
+}
+#wrap-rezults{
+}
+.active{
+	display: block;
+}
+.non-active{
+	display: none;
+}
+.rezult{
+	font-weight: bold;
+	background-color: #fff;
+	padding: 10px;
+	color: #272822;
+	cursor: pointer;
+}
+.rezult:hover{
+	background-color:#16568f;
+	color: white;
+}

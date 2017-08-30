@@ -1,0 +1,30 @@
+<?php 
+					include("php/config.php");
+					include("php/engine.php");
+					$db=new mysqli($server_db,$user_db,$password_db,$base_db);
+					$username=$_GET['username'];
+					$rez=$db->query("SELECT * FROM users b LEFT OUTER JOIN users m ON b.darling_id = m.id WHERE b.username='$username'");
+					
+					$non_user=true;
+					if($rez->num_rows==0){
+						echo "Такого користувача не знайдено.";
+						$non_user=false;
+					}
+					if($non_user){
+						$first_name;
+						$last_name;
+						$username;
+						$darling_first_name;
+						$darling_last_name;
+						$darling_username;
+						while($row=$rez->fetch_array()){
+							$first_name=$row[4];
+							$last_name=$row[5];
+							$username=$row[3];
+							$darling_first_name=$row[13];
+							$darling_last_name=$row[14];
+							$darling_username=$row[12];
+						}
+						
+					}
+					?>

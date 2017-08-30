@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Circles moves</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(".circle").each(function(index, el) {
+			$(el).css({
+				"top": (index*25)+"px",
+				"left": (index*75)+"px"
+			});
+			$(el).draggable();
+			$("#s"+(index+1)).droppable({
+				accept:"#c"+(index+1),
+				hoverClass: "circle-stat-on", 
+				drop: function ( event, ui ) {
+					$(this).addClass('circle-stat-catch');
+					index=$(this).html();
+					clearInterval($("#c"+index).thread);
+					$("#c"+index).draggable( "disable" );
+				}
+			});
+			$(this).thread=setInterval(function(){
+			move("#c"+(index+1));
+			},500);
+		});
+		function move(name){
+			if(Math.floor(Math.random() * (3 - 0 + 1)) + 0==0){
+				tops=5+parseInt($(name).css('top').slice(0,-2));
+				lefts=5+parseInt($(name).css('left').slice(0,-2));
+			}else{
+				if(Math.floor(Math.random() * (3 - 0 + 1)) + 0==1){
+					tops=5+parseInt($(name).css('top').slice(0,-2));
+					lefts=parseInt($(name).css('left').slice(0,-2))-5;
+				}else{
+					if(Math.floor(Math.random() * (3 - 0 + 1)) + 0==3){
+						tops=parseInt($(name).css('top').slice(0,-2))-5;
+						lefts=parseInt($(name).css('left').slice(0,-2))-5;
+					}else{
+						tops=parseInt($(name).css('top').slice(0,-2))-5;
+						lefts=parseInt($(name).css('left').slice(0,-2))+5;
+					}
+				}
+			}
+			$(name).css({
+				"top": tops+"px",
+				"left": lefts+"px"
+			});
+
+		}
+		function check(){
+			var count=0;
+			$(".circle-stat").each(function(index, el) {
+				if($(el).hasClass('circle-stat-catch')){
+					count+=1;
+				}
+			});
+			if(count==15){
+				alert("ВІТАЄМО");
+			}
+		}
+		setInterval(check,10000);
+		
+	});
+
+	</script>
+	<style>
+		@import "http://webfonts.ru/import/roboto.css";
+		http://www.dojki.com/335916/
+		.circle{
+			position: absolute;
+			height: 80px;
+			width: 100px;
+			background-color: #E3BE79;
+			font-family: 'Roboto';
+			font-size: 40px;
+			color: #fff;
+			border-radius: 50%;
+			text-align: center;
+			padding-top: 20px;
+			top:500px;
+			left:50px;
+			-webkit-transition: all 0.5s ease-in;
+			z-index: 0;
+		}
+		.circle-stat{
+			
+			margin-right: 300px;
+			font-family: 'Roboto';
+			font-size: 40px;
+			height: 150px;
+			width: 150px;
+			background-color: rgba(255,0,0,0.4);
+		}
+		.circle-stat-catch{
+			background-color: #37D0C1;
+		}
+		.circle-stat-on{
+			background-color: #FBDF6F;
+			transform: scale(1.2);
+		}
+		.circle:hover{
+			border:2px solid #DAA94E;
+			z-index: 999;
+		}
+	</style>
+</head>
+<body>
+	<div class="circle" id="c1">1</div>
+	<div class="circle" id="c2">2</div>
+	<div class="circle" id="c3">3</div>
+	<div class="circle" id="c4">4</div>
+	<div class="circle" id="c5">5</div>
+	<div class="circle" id="c6">6</div>
+	<div class="circle" id="c7">7</div>
+	<div class="circle" id="c8">8</div>
+	<div class="circle" id="c9">9</div>
+	<div class="circle" id="c10">10</div>
+	<div class="circle" id="c11">11</div>
+	<div class="circle" id="c12">12</div>
+	<div class="circle" id="c13">13</div>
+	<div class="circle" id="c14">14</div>
+	<div class="circle" id="c15">15</div>
+	<div class="circle-stat" id="s1">1</div>
+	<div class="circle-stat" id="s2">2</div>
+	<div class="circle-stat" id="s3">3</div>
+	<div class="circle-stat" id="s4">4</div>
+	<div class="circle-stat" id="s5">5</div>
+	<div class="circle-stat" id="s6">6</div>
+	<div class="circle-stat" id="s7">7</div>
+	<div class="circle-stat" id="s8">8</div>
+	<div class="circle-stat" id="s9">9</div>
+	<div class="circle-stat" id="s10">10</div>
+	<div class="circle-stat" id="s11">11</div>
+	<div class="circle-stat" id="s12">12</div>
+	<div class="circle-stat" id="s13">13</div>
+	<div class="circle-stat" id="s14">14</div>
+	<div class="circle-stat" id="s15">15</div>
+
+</body>
+</html>
